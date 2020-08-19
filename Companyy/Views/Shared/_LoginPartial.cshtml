@@ -1,0 +1,102 @@
+﻿@using Microsoft.AspNet.Identity
+@using Companyy.Models;
+@if (Request.IsAuthenticated)
+{
+    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
+    {
+        var db = new ApplicationDbContext();
+        var UserID = User.Identity.GetUserId();
+        var CurrentUser = db.Users.Where(a => a.Id == UserID).SingleOrDefault();
+        @Html.AntiForgeryToken()
+
+        <ul class="nav navbar-nav navbar-right">
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                    <span class="glyphicon glyphicon-user"></span>
+                    <strong>Wolcome : @CurrentUser.UserType</strong>
+                    <span class="glyphicon glyphicon-chevron-right"></span>
+
+                </a>
+                <ul class="dropdown-menu">
+                    <li>
+                        <div class="navbar-user">
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    <p class="text-center">
+                                        <span class="glyphicon glyphicon-user img-size"></span>
+                                    </p>
+                                </div>
+                                <div class="col-lg-8">
+                                    <p class="text-right">
+                                        <strong>
+                                            @CurrentUser.UserType
+                                        </strong>
+                                    </p>
+                                    @if (CurrentUser.UserType == "Admin")
+                                    {
+                                        <a href="~/Employs/Index" class="btn btn-success btn-block">All Employee</a>
+                                        <a href="~/HRs/Index" class="btn btn-success btn-block">HR page</a>
+                                        <a href="~/IT/Index" class="btn btn-success btn-block">IT page</a>
+                                        <a href="~/Salaries/Index" class="btn btn-success btn-block">Finance Departments page</a>
+
+
+
+                                    }
+                                    else if (CurrentUser.UserType == "Finance Departments")
+                                    {
+                                        <a href="~/Salaries/Index" class="btn btn-success btn-block">Home page</a>
+                                        <a href="~/Salaries/Create" class="btn btn-success btn-block">To add salary to an employee</a>
+
+                                    }
+                                      else if(CurrentUser.UserType == "HR")
+                                    {
+                                        <a href="~/HRs/Index" class="btn btn-success btn-block">Home page</a>
+                                        <a href="~/HRs/Create" class="btn btn-success btn-block">To add Data to an employee</a>
+                                        <a href="~/Employs/Create" class="btn btn-success btn-block">To add New employee</a>
+                                        <a href="~/Employs/Index" class="btn btn-success btn-block">To List all in Company employee</a>
+
+
+                                    }
+                                    else
+                                    {
+                                        <a href="~/IT/Index" class="btn btn-success btn-block">Home page</a>
+                                        <a href="~/IT/Create" class="btn btn-success btn-block">To add Data to an employee</a>
+                                        <a href="~/Account/Register" class="btn btn-success btn-block">Create New Account</a>
+
+
+                                    }
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </li>
+                    <li class="divider"></li>
+                    <li>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <p>
+                                    <a href="javascript:document.getElementById('logoutForm').submit()" class="btn btn-danger btn-block">Log OFF</a>
+                                </p>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+
+            </li>
+
+
+        </ul>
+    }
+}
+else
+{
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="~/Account/Login">
+                            <i class="glyphicon glyphicon-user"></i>
+                            Login
+                        </a>
+                    </li>
+                </ul>
+                }

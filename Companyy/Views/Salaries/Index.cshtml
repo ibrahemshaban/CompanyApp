@@ -1,0 +1,52 @@
+﻿@model IEnumerable<Companyy.Models.Salary>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    <button class="btn btn-default" type="submit">  @Html.ActionLink("To Add Salary To an employee", "Create", "Salaries")</button>
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Employ.UserName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SalaryEmploy)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TimeSalaryEmpoly)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Discount)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Employ.UserName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SalaryEmploy)
+        </td>
+        <td>
+            @item.TimeSalaryEmpoly.ToShortDateString()
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Discount)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.id }, new { @class = "btn btn-primary" }) |
+            @Html.ActionLink("Details", "Details", new { id=item.id }, new { @class = "btn btn-primary" }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.id }, new { @class = "btn btn-danger" })
+        </td>
+    </tr>
+}
+
+</table>

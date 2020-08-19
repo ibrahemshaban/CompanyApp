@@ -1,0 +1,66 @@
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+#searchName {
+    width: 130px;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    background-color: white;
+    background-repeat: no-repeat;
+    background-position: 10px 10px;
+    padding: 12px 20px 12px 12px;
+    transition: width 0.4s ease-in-out;
+}
+
+    #searchName:focus {
+        width: 100%;
+    }
+.img-size {
+    font-size: 90px;
+}
+
+.navbar-user {
+    padding: 10px;
+    padding-bottom: 0px;
+    width: 350px;
+}
+.navbar-inverse {
+    background-color: #2a6496;
+    border-color: #333333;
+}
+.navbar-inverse .navbar-brand {
+        color: #f5f5f5;
+    }
+.navbar-inverse .navbar-nav > li > a {
+        color: #f5f5f5;
+    }
+.jumbotron {
+    padding: 30px;
+    margin-bottom: 30px;
+    font-size: 21px;
+    font-weight: 200;
+    line-height: 2.1428571435;
+    color: inherit;
+    background-color: #ffffff;
+}

@@ -1,0 +1,69 @@
+﻿@using Microsoft.AspNet.Identity
+@using Companyy.Models;
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="jumbotron">
+    <div class="row">
+        <div class="col-md-12">
+            <img src="~/Uploads/na-strone-1.png" style=" width: 400px; margin-left: 299px;" />
+        </div>
+    </div>
+</div>
+
+
+<div class="row">
+@if (Request.IsAuthenticated)
+
+{
+    var db = new ApplicationDbContext();
+    var UserID = User.Identity.GetUserId();
+    var CurrentUser = db.Users.Where(a => a.Id == UserID).SingleOrDefault();
+    @Html.AntiForgeryToken()
+    if (CurrentUser.UserType == "Admin")
+    {
+        <div class="col-md-4">
+            <h2>Go to the Home Page Of the HR Department</h2>
+
+            <a href="~/HRs/Index" class="btn btn-primary btn-block">HR page</a>
+        </div>
+        <div class="col-md-4">
+            <h2>Go to the Home Page Of the IT Department</h2>
+            <a href="~/IT/Index" class="btn btn-primary btn-block">IT page</a>
+        </div>
+        <div class="col-md-4">
+            <h2>Go to the Home Page Of the Finance Department</h2>
+            <a href="~/Salaries/Index" class="btn btn-primary btn-block">Finance Departments page</a>
+        </div>
+
+
+    }
+    else if (CurrentUser.UserType == "HR")
+    {
+        <div class="col-md-4">
+            <h2>Go to the Home Page Of the HR Department</h2>
+
+            <a href="~/HRs/Index" class="btn btn-primary btn-block">HR page</a>
+        </div>
+    }
+    else if (CurrentUser.UserType == "IT")
+    {
+        <div class="col-md-4">
+            <h2>Go to the Home Page Of the IT Department</h2>
+            <a href="~/IT/Index" class="btn btn-primary btn-block">IT page</a>
+        </div>
+    }
+    else
+    {
+        <div class="col-md-4">
+            <h2>Go to the Home Page Of the Finance Department</h2>
+            <a href="~/Salaries/Index" class="btn btn-primary btn-block">Finance Departments page</a>
+        </div>
+    }
+
+
+}
+    
+    
+</div>

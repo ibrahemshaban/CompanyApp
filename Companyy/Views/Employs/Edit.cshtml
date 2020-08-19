@@ -1,0 +1,125 @@
+﻿@model Companyy.Models.Employ
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Edit</h2>
+
+@using (Html.BeginForm("Edit", "Employs", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    @*<div class="form-horizontal">
+        <h4>Employ</h4>*@
+        <div class="form-horizontal">
+            <div class="alert alert-danger" id="error-div" style="display:none">
+                <span id="view-err">
+
+                </span>
+
+            </div>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.Id)
+            @Html.HiddenFor(model => model.JobImage)
+
+
+
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.UserName, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Adress, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Adress, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Adress, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.BirthDate, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.BirthDate, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.BirthDate, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.PhoneNumber, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.PhoneNumber, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Qualification, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Qualification, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Qualification, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.JobImage, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <input type="file" name="upload" id="Image">
+                    @Html.ValidationMessageFor(model => model.JobImage, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Save" class="btn btn-primary" id="save" />
+                </div>
+            </div>
+        </div>
+    @*</div>*@
+}
+
+<div>
+    <button class="btn btn-default" type="submit">  @Html.ActionLink("Back To List", "Index", "Employs")</button>
+</div>
+@section scripts{
+    <script>
+        $(function () {
+            $("#save").click(function () {
+
+                if ($("#Image").val() != ""){
+                //check if the image extension is valid
+                    var filename = document.getElementById("Image").value;
+                var extensionImg = filename.substr(filename.lastIndexOf('.') + 1);
+                var validExtensions = ['jpg', 'png', 'gif', 'bmp'];
+                if ($.inArray(extensionImg, validExtensions)== -1) {
+                    $("#error-div").fadeIn();
+                    $("#view-err").append("برجاء قم باختيار صورة بامتداد صحيح");
+                    return false;
+                }
+                // check if the image size is vald(2mb)
+                var myFileSize = document.getElementById("Image").files[0].size / 1024 / 1024;
+                if (myFileSize > 2) {
+                    $("#error-div").fadeIn();
+                    $("#view-err").append("برجاء قم باختيار صورة حجمها اقل من 2 ميجل بيت");
+                    return false;
+
+                }
+
+               
+                }
+                $("#error-div").fadeIn();
+                $("#view-err").append("تم التعديل  بنجاح");
+            });
+
+        });
+
+    </script>
+
+}
